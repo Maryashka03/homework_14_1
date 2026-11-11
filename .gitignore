@@ -12,3 +12,4 @@ htmlcov/
 
 # Environment variables
 .env
+.mypy_cache/
