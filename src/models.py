@@ -1,3 +1,6 @@
+from typing import Any
+
+
 class Product:
     """Класс для представления товара."""
 
@@ -10,8 +13,31 @@ class Product:
     ):
         self.name = name
         self.description = description
-        self.price = price
+        self.__price = price
         self.quantity = quantity
+
+    @property
+    def price(self) -> float:
+        """Возвращает цену товара."""
+        return self.__price
+
+    @price.setter
+    def price(self, new_price: float) -> None:
+        """Изменяет цену товара."""
+        if new_price > 0:
+            self.__price = new_price
+        else:
+            print("Цена не должна быть нулевая или отрицательная")
+
+    @classmethod
+    def new_product(cls, product_data: dict[str, Any]) -> "Product":
+        """Создает новый товар из словаря."""
+        return cls(
+            product_data["name"],
+            product_data["description"],
+            product_data["price"],
+            product_data["quantity"]
+        )
 
 
 class Category:
@@ -28,7 +54,23 @@ class Category:
     ):
         self.name = name
         self.description = description
-        self.products = products
+        self.__products = products
 
         Category.category_count += 1
         Category.product_count += len(products)
+
+    def add_product(self, product: Product) -> None:
+        """Добавляет товар в категорию."""
+        self.__products.append(product)
+        Category.product_count += 1
+
+    @property
+    def products(self) -> str:
+        """Возвращает список товаров в виде строки."""
+        result = ""
+        for product in self.__products:
+            result += (
+                f"{product.name}, {product.price} руб. "
+                f"Остаток: {product.quantity} шт.\n"
+            )
+        return result
