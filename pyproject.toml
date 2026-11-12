@@ -1,0 +1,30 @@
+[project]
+name = "homework-14-1"
+version = "0.1.0"
+description = "SkyPro homework 14.1 - Introduction to OOP"
+authors = [
+    {name = "Student"}
+]
+requires-python = ">=3.10,<4.0"
+dependencies = []
+
+[tool.poetry]
+packages = [{include = "src"}]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["src"]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "flake8 (==7.3.0)",
+    "autopep8 (>=2.3.2,<3.0.0)",
+    "pytest (>=9.2.0,<10.0.0)",
+    "pytest-cov (>=7.1.0,<8.0.0)"
+]
