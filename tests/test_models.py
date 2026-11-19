@@ -55,3 +55,25 @@ def test_product_count():
     Category("Одежда", "Вещи", [product3])
 
     assert Category.product_count == 3
+
+
+def test_product_str():
+    product = Product("Телефон", "Смартфон", 100.0, 10)
+
+    assert str(product) == "Телефон, 100.0 руб. Остаток: 10 шт."
+
+
+def test_category_str():
+    product1 = Product("Телефон", "Смартфон", 100.0, 10)
+    product2 = Product("Ноутбук", "Компьютер", 200.0, 5)
+
+    category = Category("Электроника", "Техника", [product1, product2])
+
+    assert str(category) == "Электроника, количество продуктов: 15 шт."
+
+
+def test_product_add():
+    product1 = Product("Телефон", "Смартфон", 100.0, 10)
+    product2 = Product("Ноутбук", "Компьютер", 200.0, 2)
+
+    assert product1 + product2 == 1400.0
