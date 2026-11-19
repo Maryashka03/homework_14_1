@@ -77,3 +77,10 @@ def test_product_add():
     product2 = Product("Ноутбук", "Компьютер", 200.0, 2)
 
     assert product1 + product2 == 1400.0
+
+
+def test_product_add_invalid_type():
+    product = Product("Телефон", "Смартфон", 100.0, 10)
+
+    with pytest.raises(TypeError):
+        product + 100
