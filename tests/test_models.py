@@ -1,6 +1,6 @@
 import pytest
 
-from src.models import Category, Product, Smartphone, LawnGrass
+from src.models import BaseProduct, Category, Product, Smartphone, LawnGrass
 
 
 @pytest.fixture(autouse=True)
@@ -180,3 +180,34 @@ def test_category_rejects_invalid_product():
 
     with pytest.raises(TypeError):
         category.add_product("Не товар")
+
+
+def test_base_product_is_abstract():
+    with pytest.raises(TypeError):
+        BaseProduct("Товар", "Описание", 100.0, 5)
+
+
+def test_product_uses_print_mixin(capsys):
+    product = Product("Телефон", "Смартфон", 100.0, 5)
+
+    captured = capsys.readouterr()
+
+    assert isinstance(product, Product)
+    assert "Product" in captured.out
+    assert "Телефон" in captured.out
+    assert "Смартфон" in captured.out
+
+
+def test_smartphone_uses_print_mixin(capsys):
+    phone = Smartphone(
+        "iPhone", "Телефон", 100000.0, 2,
+        2.5, "15 Pro", 256, "Черный"
+    )
+
+    captured = capsys.readouterr()
+
+    assert isinstance(phone, Smartphone)
+    assert "Smartphone" in captured.out
+    assert "iPhone" in captured.out
+    assert "15 Pro" in captured.out
+    assert "256" in captured.out
