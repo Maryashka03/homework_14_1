@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class BaseProduct(ABC):
     """Абстрактный базовый класс для всех продуктов."""
 
@@ -20,6 +21,7 @@ class BaseProduct(ABC):
         """Возвращает строковое представление продукта."""
         pass
 
+
 class PrintMixin:
     """Миксин для вывода информации о созданном объекте."""
 
@@ -33,6 +35,7 @@ class PrintMixin:
             for name, value in self.__dict__.items()
         )
         return f"{self.__class__.__name__}({parameters})"
+
 
 class Product(PrintMixin, BaseProduct):
     """Класс для представления товара."""
@@ -55,6 +58,7 @@ class Product(PrintMixin, BaseProduct):
             + other.price * other.quantity
         )
 
+
 class Smartphone(Product):
     """Класс для представления смартфонов."""
 
@@ -76,6 +80,7 @@ class Smartphone(Product):
 
         super().__init__(name, description, price, quantity)
 
+
 class LawnGrass(Product):
     """Класс для представления газонной травы."""
 
@@ -94,6 +99,7 @@ class LawnGrass(Product):
         self.color = color
 
         super().__init__(name, description, price, quantity)
+
 
 class Category:
     """Класс для представления категории товаров."""
