@@ -20,9 +20,6 @@ class Product:
         )
 
     def __add__(self, other: object) -> float:
-        if not isinstance(other, Product):
-            raise TypeError("Можно складывать только товары.")
-
         if type(self) is not type(other):
             raise TypeError(
                 "Нельзя складывать товары разных классов."
@@ -88,7 +85,7 @@ class Category:
     ):
         self.name = name
         self.description = description
-        self.__products = []
+        self.__products: list[Product] = []
 
         Category.category_count += 1
 
